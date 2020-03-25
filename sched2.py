@@ -26,6 +26,7 @@ class Scheduler():
 	"""
 	def __init__(self):
 		self.jobs = []
+		self.is_running = False
 
 	def add_job(self, *args, **kwargs):
 		"""
@@ -38,6 +39,9 @@ class Scheduler():
 		"""
 		开始执行任务表。
 		"""
+		if self.is_running:
+			raise SchedulerError('Scheduler has already running!')
+		self.is_running = True
 		jobs = [job for job in self.jobs if job.is_running]
 		while len(jobs) > 0:
 			for job in jobs:
@@ -45,6 +49,7 @@ class Scheduler():
 					job.run()
 			jobs = [job for job in jobs if job.is_running]
 			sleep(delay_seconds)
+		self.is_running = False
 
 class Job():
 	"""
