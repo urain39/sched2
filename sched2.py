@@ -35,7 +35,7 @@ class Scheduler():
 		self.jobs.append(Job(*args, **kwargs))
 		return self
 
-	def start(self, delay_seconds=10, sleep=time.sleep):
+	def start(self, delay_seconds=10):
 		"""
 		开始执行任务表。
 		"""
@@ -48,7 +48,7 @@ class Scheduler():
 				if time.time() >= job.next_time:
 					job.run()
 			jobs = [job for job in jobs if job.is_running]
-			sleep(delay_seconds)
+			time.sleep(delay_seconds)
 		self.is_running = False
 
 class Job():
