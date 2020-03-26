@@ -14,7 +14,7 @@ sched2.Scheduler()\
 		callback=say_hello_once,
 		delay_seconds=0
 	)\
-	.start(15)
+	.start(5)
 
 sched2.Scheduler()\
 	.add_job(

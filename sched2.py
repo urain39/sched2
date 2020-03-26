@@ -12,7 +12,7 @@ sched2.Scheduler()\
 		callback=say_hello,
 		delay_seconds=10,
 		start_at=None)\
-	.start(delay_seconds=20)
+	.start(delay_seconds=5)
 """
 
 
