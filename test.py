@@ -1,6 +1,6 @@
 import time
 import sched2
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def tell_time(job):
 	print(time.strftime('Time: %H:%M:%S'))
@@ -16,12 +16,13 @@ sched2.Scheduler()\
 	)\
 	.start(5)
 
+start_at = datetime.now().replace(minute=0, second=0) + timedelta(hours=1)
+
 sched2.Scheduler()\
 	.add_job(
 		callback=tell_time,
 		delay_seconds=60,
-		start_at=time.mktime(
-			datetime.now().replace(second=0).timetuple()))\
+		start_at=time.mktime(start_at.timetuple()))\
 	.add_job(
 		callback=say_hello_once,
 		delay_seconds=0

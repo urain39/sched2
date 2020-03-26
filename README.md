@@ -16,6 +16,33 @@ sched2.Scheduler()\
 	.start(delay_seconds=5)
 ```
 
+# 高级用法
+```py
+import time
+import sched2
+from datetime import datetime, timedelta
+
+def tell_time(job):
+	print(time.strftime('Time: %H:%M:%S'))
+
+def say_hello_once(job):
+	print('Hello!')
+	job.stop()
+
+start_at = datetime.now().replace(minute=0, second=0) + timedelta(hours=1)
+
+sched2.Scheduler()\
+	.add_job(
+		callback=tell_time,
+		delay_seconds=60,
+		start_at=time.mktime(start_at.timetuple()))\
+	.add_job(
+		callback=say_hello_once,
+		delay_seconds=0
+	)\
+	.start(10)
+```
+
 用户自定义的`callback`函数接收一个参数，这个参数就是`callback`被包装后的
 `Job`实例，一般用于将一个任务关闭。这样设计目的是让用户不用显示的实例化`Job`
 ，简化流程。
