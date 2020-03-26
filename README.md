@@ -1,7 +1,9 @@
 # sched2
 极简主义化的Scheduler实现。
 
-### 使用方法
+启发自`asyncio`部分源码，与[schedule](https://github.com/dbader/schedule)
+
+## 使用方法
 ```py
 import sched2
 
@@ -16,7 +18,7 @@ sched2.Scheduler()\
 	.start(delay_seconds=5)
 ```
 
-# 高级用法
+## 高级用法
 ```py
 import time
 import sched2
@@ -40,7 +42,7 @@ sched2.Scheduler()\
 		callback=say_hello_once,
 		delay_seconds=0
 	)\
-	.start(10)
+	.start(delay_seconds=10)
 ```
 
 用户自定义的`callback`函数接收一个参数，这个参数就是`callback`被包装后的

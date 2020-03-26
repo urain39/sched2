@@ -14,7 +14,7 @@ sched2.Scheduler()\
 		callback=say_hello_once,
 		delay_seconds=0
 	)\
-	.start(5)
+	.start(delay_seconds=5)
 
 start_at = datetime.now().replace(minute=0, second=0) + timedelta(hours=1)
 
@@ -27,4 +27,4 @@ sched2.Scheduler()\
 		callback=say_hello_once,
 		delay_seconds=0
 	)\
-	.start(15)
+	.start(delay_seconds=15)
