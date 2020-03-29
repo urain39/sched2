@@ -16,6 +16,22 @@ sched2.Scheduler()\
 """
 
 
+def times(count):
+	"""
+	限制某个任务执行次数的装饰器。
+	"""
+	def wrapper(fn):
+		c = [0]
+		def wrapped(job):
+			if c[0] < count:
+				fn(job)
+				c[0] += 1
+			else:
+				job.stop()
+		return wrapped
+	return wrapper
+
+
 class SchedulerError(Exception):
 	pass
 
