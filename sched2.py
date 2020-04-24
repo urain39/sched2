@@ -63,7 +63,12 @@ class Scheduler():
 			for job in jobs:
 				if time.time() >= job.next_time:
 					job.run()
-			jobs = [job for job in jobs if job.is_running]
+			# 检测任务列表是否有已停止的任务
+			for job in jobs:
+				if not job.is_running:
+					# 如果有则过滤掉已停止的任务
+					jobs = [job for job in jobs if job.is_running]
+					break
 			time.sleep(delay_seconds)
 		self.is_running = False
 
@@ -77,6 +82,9 @@ class Job():
 		self.next_time = start_at if isinstance(
 			start_at, (int, float)) else time.time()
 		self.is_running = True  # 创建即运行
+
+	def __bool__(self):
+		return self.is_running
 
 	def run(self):
 		"""
